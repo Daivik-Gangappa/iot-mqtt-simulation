@@ -17,7 +17,7 @@ client = mqtt.Client(client_id=client_id, protocol=mqtt.MQTTv311)
 client.username_pw_set(username, password)
 client.connect(mqtt_broker, mqtt_port)
 
-print("🚀 Publishing sensor data to ThingSpeak...")
+print("Publishing sensor data to ThingSpeak...")
 
 time.sleep(5)
 
@@ -33,12 +33,12 @@ while True:
     status = result[0]
 
     if status == 0:
-        print(f"✅ Sent: {payload}")
+        print(f"Sent: {payload}")
         
         with open("sensor_log.txt", "a") as file:
             timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
             file.write(f"{timestamp},{temperature},{humidity},{co2}\n")
     else:
-        print("❌ Failed to send message")
+        print("Failed to send message")
 
     time.sleep(15)  # ThingSpeak allows updates for every 15 secs
